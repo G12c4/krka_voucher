@@ -1,0 +1,41 @@
+2024-03-31 19:56:48,362 - DEBUG - Starting new HTTPS connection (1): apps.rao.hr:443
+2024-03-31 19:56:48,561 - DEBUG - https://apps.rao.hr:443 "POST /routing/login HTTP/1.1" 200 None
+2024-03-31 19:56:48,633 - DEBUG - https://apps.rao.hr:443 "POST /routing/getPartnerWebDocuments HTTP/1.1" 200 None
+2024-03-31 19:56:48,635 - INFO - Found 19 old vouchers
+2024-03-31 19:56:48,635 - INFO - Found 19 old vouchers
+2024-03-31 19:56:48,638 - ERROR - Error: 'coroutine' object has no attribute 'chromium'
+Traceback (most recent call last):
+  File "c:\Users\Admin\Documents\krka_voucheri_v0.6\backend\create_ticket_pw.py", line 198, in run_test
+    self._login()
+  File "c:\Users\Admin\Documents\krka_voucheri_v0.6\backend\create_ticket_pw.py", line 100, in _login
+    self.browser = self.playwright.chromium.launch(headless=self.headless)
+AttributeError: 'coroutine' object has no attribute 'chromium'
+2024-03-31 19:56:48,638 - ERROR - Error: 'coroutine' object has no attribute 'chromium'
+Traceback (most recent call last):
+  File "c:\Users\Admin\Documents\krka_voucheri_v0.6\backend\create_ticket_pw.py", line 198, in run_test
+    self._login()
+  File "c:\Users\Admin\Documents\krka_voucheri_v0.6\backend\create_ticket_pw.py", line 100, in _login
+    self.browser = self.playwright.chromium.launch(headless=self.headless)
+AttributeError: 'coroutine' object has no attribute 'chromium'
+2024-03-31 19:57:43,088 - DEBUG - Starting new HTTPS connection (1): apps.rao.hr:443
+2024-03-31 19:57:43,378 - DEBUG - https://apps.rao.hr:443 "POST /routing/login HTTP/1.1" 200 None
+2024-03-31 19:57:43,459 - DEBUG - https://apps.rao.hr:443 "POST /routing/getPartnerWebDocuments HTTP/1.1" 200 None
+2024-03-31 19:57:43,464 - INFO - Found 19 old vouchers
+2024-03-31 19:57:43,464 - INFO - Found 19 old vouchers
+2024-03-31 19:57:43,468 - DEBUG - Using proactor: IocpProactor
+2024-03-31 19:59:35,583 - DEBUG - Starting new HTTPS connection (1): apps.rao.hr:443
+2024-03-31 19:59:35,779 - DEBUG - https://apps.rao.hr:443 "POST /routing/login HTTP/1.1" 200 None
+2024-03-31 19:59:35,858 - DEBUG - https://apps.rao.hr:443 "POST /routing/getPartnerWebDocuments HTTP/1.1" 200 None
+2024-03-31 19:59:35,860 - INFO - Found 19 old vouchers
+2024-03-31 19:59:35,860 - INFO - Found 19 old vouchers
+2024-03-31 19:59:35,863 - DEBUG - Using proactor: IocpProactor
+2024-04-01 00:41:30,247 - INFO - Found 2 old vouchers
+2024-04-01 00:41:30,961 - INFO - Browser launched
+2024-04-01 00:41:30,961 - INFO - New context created
+2024-04-01 00:41:33,422 - INFO - Login successful!
+2024-04-01 00:41:39,667 - INFO - Ticked data entered successful!
+2024-04-01 00:41:53,225 - INFO - Found 2 old vouchers
+2024-04-01 00:41:53,893 - INFO - Browser launched
+2024-04-01 00:41:53,894 - INFO - New context created
+2024-04-01 00:41:56,621 - INFO - Login successful!
+2024-04-01 00:42:02,852 - INFO - Ticked data entered successful!
