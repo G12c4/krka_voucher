@@ -1,2 +1,9 @@
 filename
 backend/creds.py
+backend/rooms.db
+backend/employees.db
+backend/logfile.log
+backend/data.json
+backend/Voucher_za_npkrka.xlsx
+backend/Voucher_za_npkrka_original.xlsx
+backend/.~lock.Vaucer_za_npkrka.xlsx#
