@@ -107,6 +107,35 @@ class VoucherCreator:
         date = datetime.strptime(string, "%d.%m.%Y")
         return date.month - 1
 
+    def _get_entry_exit_periods(self, month):
+        periods = {
+            'January': ('08:00', '09:00'),
+            'February': ('08:00', '09:00'),
+            'March': ('08:00', '09:00'),
+            'April': ('08:00', '09:00'),
+            'May': ('08:00', '09:00'),
+            'June': ('08:00', '09:00'),
+            'July': ('08:00', '09:00'),
+            'August': ('08:00', '09:00'),
+            'September': ('08:00', '09:00'),
+            'October': ('09:00', '10:00'),
+            'November': ('09:00', '10:00'),
+            'December': ('09:00', '10:00')
+        }
+        return periods.get(month, (None, None))
+
+    def _get_times_for_date(self, date_in):
+        # Parse the date string to extract the month
+        day, month, year = map(int, date_in.split('.'))
+
+        # Convert month number to month name
+        month_name = datetime(year, month, day).strftime('%B')
+
+        # Get entry and exit times
+        entry_time, exit_time = self._get_entry_exit_periods(month_name)
+
+        return entry_time, exit_time
+
     async def _login(self) -> None:
         """Perform login operation."""
         self.playwright = await async_playwright().start()
@@ -155,9 +184,10 @@ class VoucherCreator:
             await self.page.get_by_text("Odaberite nacin izlaska iz parka").click()
             await self.page.get_by_text("Pjesaci").nth(2).click()
             await self.page.get_by_text("Dohvati periode ulaska").click()
-            await self.page.get_by_role("cell", name=f"{self.date_in} 08:00").click()
+            entry_time, exit_time = self._get_times_for_date(self.date_in)
+            await self.page.get_by_role("cell", name=f"{self.date_in} {entry_time}").click()
             await self.page.get_by_role("dialog", name="Odaberite ulaznicu").click()
-            await self.page.get_by_role("cell", name=f"{self.date_in} 09:00").click()
+            await self.page.get_by_role("cell", name=f"{self.date_in} {exit_time}").click()
             if self.grupe_odraslih:
                 await self.page.get_by_role("button", name=" Dodaj ulaznicu").click()
                 await self.page.get_by_role("cell", name="Grupe odraslih", exact=True).click()
@@ -230,7 +260,7 @@ class VoucherCreator:
 
 async def main():
     # for testing
-    date_in = "01.06.2024"
+    date_in = "20.10.2024"
     grupe_odraslih = 1
     grupe_djece = 1
     grupa_djece_0_7 = 1
