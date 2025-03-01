@@ -44,6 +44,7 @@ class VoucherCreator:
         self._check_date_format()
         self._create_session()
         self._get_voucher_numbers()
+        self._get_time_slots()
 
     def _check_date_format(self) -> None:
         if "/" in self.date_in:
@@ -89,13 +90,13 @@ class VoucherCreator:
 
     def _get_time_slots(self) -> None:
         # get start time for entrance
-        krka_url = "https://apps.rao.hr/routing/getLocationsForKrka?additional=15.06.2023X.XPjesaciX.X0DA06AB2C0BB5038E0530AB1A8C0A516"
+        krka_url = f"https://apps.rao.hr/routing/getLocationsForKrka?additional={self.date_in}X.XPjesaciX.X0DA06AB2C0BB5038E0530AB1A8C0A516"
         response = self.session.post(krka_url, data=json.dumps(creds.rao_creds))
         response = response.json()
         if response:
             self.time_slots = {
-                "Ulaz": response[0].get("from")[-5:],
-                "Izlaz": response[1].get("from")[-5:],
+                "Ulaz": response[0].get("from").split(' ')[1],
+                "Izlaz": response[1].get("from").split(' ')[1],
             }
             if not self.time_slots:
                 log.info("Time slots Error, no time slots!")
@@ -184,7 +185,7 @@ class VoucherCreator:
             await self.page.get_by_text("Odaberite nacin izlaska iz parka").click()
             await self.page.get_by_text("Pjesaci").nth(2).click()
             await self.page.get_by_text("Dohvati periode ulaska").click()
-            entry_time, exit_time = self._get_times_for_date(self.date_in)
+            entry_time, exit_time = self.time_slots.get("Ulaz"), self.time_slots.get("Izlaz")
             await self.page.get_by_role("cell", name=f"{self.date_in} {entry_time}").click()
             await self.page.get_by_role("dialog", name="Odaberite ulaznicu").click()
             await self.page.get_by_role("cell", name=f"{self.date_in} {exit_time}").click()
