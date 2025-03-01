@@ -108,6 +108,7 @@ class VoucherCreator:
         date = datetime.strptime(string, "%d.%m.%Y")
         return date.month - 1
 
+    #deprecated
     def _get_entry_exit_periods(self, month):
         periods = {
             'January': ('08:00', '09:00'),
@@ -125,6 +126,7 @@ class VoucherCreator:
         }
         return periods.get(month, (None, None))
 
+    #deprecated
     def _get_times_for_date(self, date_in):
         # Parse the date string to extract the month
         day, month, year = map(int, date_in.split('.'))
