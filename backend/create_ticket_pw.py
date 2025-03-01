@@ -110,8 +110,8 @@ class VoucherCreator:
     def _get_entry_exit_periods(self, month):
         periods = {
             'January': ('08:00', '09:00'),
-            'February': ('08:00', '09:00'),
-            'March': ('08:00', '09:00'),
+            'February': ('09:00', '10:00'),
+            'March': ('09:00', '10:00'),
             'April': ('08:00', '09:00'),
             'May': ('08:00', '09:00'),
             'June': ('08:00', '09:00'),
@@ -260,7 +260,7 @@ class VoucherCreator:
 
 async def main():
     # for testing
-    date_in = "20.10.2024"
+    date_in = "02.03.2025"
     grupe_odraslih = 1
     grupe_djece = 1
     grupa_djece_0_7 = 1
