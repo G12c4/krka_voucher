@@ -187,7 +187,7 @@ class VoucherCreator:
             await self.page.get_by_text("Odaberite nacin izlaska iz parka").click()
             await self.page.get_by_text("Pjesaci").nth(2).click()
             await self.page.get_by_text("Dohvati periode ulaska").click()
-            entry_time, exit_time = self.time_slots.get("Ulaz"), self.time_slots.get("Izlaz")
+            entry_time, exit_time = self.time_slots.get("Izlaz"), self.time_slots.get("Ulaz")
             await self.page.get_by_role("cell", name=f"{self.date_in} {entry_time}").click()
             await self.page.get_by_role("dialog", name="Odaberite ulaznicu").click()
             await self.page.get_by_role("cell", name=f"{self.date_in} {exit_time}").click()
@@ -263,7 +263,7 @@ class VoucherCreator:
 
 async def main():
     # for testing
-    date_in = "02.03.2025"
+    date_in = "03.03.2025"
     grupe_odraslih = 1
     grupe_djece = 1
     grupa_djece_0_7 = 1
