@@ -91,12 +91,28 @@ class VoucherCreator:
     def _get_time_slots(self) -> None:
         # get start time for entrance
         krka_url = f"https://apps.rao.hr/routing/getLocationsForKrka?additional={self.date_in}X.XPjesaciX.X0DA06AB2C0BB5038E0530AB1A8C0A516"
-        response = self.session.post(krka_url, data=json.dumps(creds.rao_creds))
+        response = self.session.post(
+            krka_url, data=json.dumps(creds.rao_creds)
+        )
         response = response.json()
         if response:
             self.time_slots = {
-                "Ulaz": response[0].get("from").split(' ')[1],
-                "Izlaz": response[1].get("from").split(' ')[1],
+                "Ulaz": next(
+                    (
+                        item["from"].split(" ")[1]
+                        for item in response
+                        if item["tripdef"] == "ULAZ"
+                    ),
+                    None,
+                ),
+                "Izlaz": next(
+                    (
+                        item["from"].split(" ")[1]
+                        for item in response
+                        if item["tripdef"] == "IZLAZ"
+                    ),
+                    None,
+                ),
             }
             if not self.time_slots:
                 log.info("Time slots Error, no time slots!")
@@ -187,7 +203,7 @@ class VoucherCreator:
             await self.page.get_by_text("Odaberite nacin izlaska iz parka").click()
             await self.page.get_by_text("Pjesaci").nth(2).click()
             await self.page.get_by_text("Dohvati periode ulaska").click()
-            entry_time, exit_time = self.time_slots.get("Izlaz"), self.time_slots.get("Ulaz")
+            entry_time, exit_time = self.time_slots.get("Ulaz"), self.time_slots.get("Izlaz")
             await self.page.get_by_role("cell", name=f"{self.date_in} {entry_time}").click()
             await self.page.get_by_role("dialog", name="Odaberite ulaznicu").click()
             await self.page.get_by_role("cell", name=f"{self.date_in} {exit_time}").click()
